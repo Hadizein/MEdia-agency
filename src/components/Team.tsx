@@ -42,52 +42,63 @@ const teamMembers = [
 
 export const Team = () => {
   return (
-    <section className="py-20 bg-background" id="team">
+    <section className="py-32 bg-background relative overflow-hidden" id="team">
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Meet Our Team</h2>
+        <div className="text-center mb-20">
+          <span className="text-primary font-bold text-sm uppercase tracking-wider mb-4 block">The Dream Team</span>
+          <h2 className="text-5xl md:text-6xl font-black mb-6">
+            Meet the <span className="text-primary">Creators</span>
+          </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Passionate professionals dedicated to youth empowerment
+            Talented individuals united by passion for creative excellence
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {teamMembers.map((member, index) => (
-            <Card
+            <div
               key={index}
-              className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+              className="group cursor-pointer"
             >
-              <div className="aspect-square overflow-hidden">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                <p className="text-primary font-medium mb-3">{member.role}</p>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {member.bio}
-                </p>
-                <div className="flex gap-3">
-                  <a
-                    href={`mailto:${member.email}`}
-                    className="p-2 bg-accent hover:bg-primary hover:text-white rounded-full transition-all"
-                  >
-                    <Mail className="h-4 w-4" />
-                  </a>
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-accent hover:bg-primary hover:text-white rounded-full transition-all"
-                  >
-                    <Linkedin className="h-4 w-4" />
-                  </a>
+              <Card className="overflow-hidden border-2 hover:border-primary transition-all duration-300 hover:shadow-2xl bg-card">
+                <div className="aspect-square overflow-hidden relative">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Social links overlay */}
+                  <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="p-3 bg-white hover:bg-primary rounded-full transition-all shadow-lg"
+                    >
+                      <Mail className="h-4 w-4 text-foreground hover:text-primary-foreground" />
+                    </a>
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 bg-white hover:bg-primary rounded-full transition-all shadow-lg"
+                    >
+                      <Linkedin className="h-4 w-4 text-foreground hover:text-primary-foreground" />
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </Card>
+                
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">{member.name}</h3>
+                  <p className="text-primary font-semibold mb-3 text-sm uppercase tracking-wide">{member.role}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {member.bio}
+                  </p>
+                </div>
+              </Card>
+            </div>
           ))}
         </div>
       </div>
